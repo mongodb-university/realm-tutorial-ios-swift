@@ -77,7 +77,9 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
     func fetchTeamMembers() {
         // Start loading indicator
         activityIndicator.startAnimating()
-        app.currentUser!.functions.getMyTeamMembers([]) { [weak self](result, error) in
+        let user = app.currentUser!
+        
+        user.functions.getMyTeamMembers([]) { [weak self](result, error) in
             DispatchQueue.main.sync {
                 guard self != nil else {
                     // This can happen if the view is dismissed 
@@ -107,13 +109,17 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
     func addTeamMember(email: String) {
         print("Adding member: \(email)")
         activityIndicator.startAnimating()
-        app.currentUser!.functions.addTeamMember([AnyBSON(email)!], self.onTeamMemberOperationComplete)
+        let user = app.currentUser!
+        
+        user.functions.addTeamMember([AnyBSON(email)!], self.onTeamMemberOperationComplete)
     }
     
     func removeTeamMember(email: String) {
         print("Removing member: \(email)")
         activityIndicator.startAnimating()
-        app.currentUser!.functions.removeTeamMember([AnyBSON(email)!], self.onTeamMemberOperationComplete)
+        let user = app.currentUser!
+        
+        user.functions.removeTeamMember([AnyBSON(email)!], self.onTeamMemberOperationComplete)
     }
 
     private func onTeamMemberOperationComplete(result: AnyBSON?, realmError: Error?) {
