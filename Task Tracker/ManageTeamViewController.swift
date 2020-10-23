@@ -111,7 +111,7 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         activityIndicator.startAnimating()
         let user = app.currentUser!
         
-        user.functions.addTeamMember([AnyBSON(email)!], self.onTeamMemberOperationComplete)
+        user.functions.addTeamMember([AnyBSON(email)], self.onTeamMemberOperationComplete)
     }
     
     func removeTeamMember(email: String) {
@@ -119,7 +119,7 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         activityIndicator.startAnimating()
         let user = app.currentUser!
         
-        user.functions.removeTeamMember([AnyBSON(email)!], self.onTeamMemberOperationComplete)
+        user.functions.removeTeamMember([AnyBSON(email)], self.onTeamMemberOperationComplete)
     }
 
     private func onTeamMemberOperationComplete(result: AnyBSON?, realmError: Error?) {
