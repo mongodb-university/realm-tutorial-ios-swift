@@ -41,7 +41,7 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
     @objc func addButtonDidClick() {
         let alertController = UIAlertController(title: "Add Team Member", message: "Enter your team member's email address.", preferredStyle: .alert)
 
-        // When the user clicks the add button, present them with a dialog to enter the task name.
+        // When the user clicks the add button, present them with a dialog to enter the member's email address.
         alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: {
             [weak self] alert -> Void in
             let textField = alertController.textFields![0]
