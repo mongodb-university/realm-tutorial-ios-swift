@@ -31,7 +31,7 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         activityIndicator.center = view.center
         view.addSubview(activityIndicator)
 
-        fetchTeamMembers();
+        fetchTeamMembers()
     }
 
     @objc func closeButtonDidClick() {
@@ -129,7 +129,7 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
                     title: "Error",
                     message: errorMessage!,
                     preferredStyle: .alert
-                );
+                )
 
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
                 present(alertController, animated: true)
