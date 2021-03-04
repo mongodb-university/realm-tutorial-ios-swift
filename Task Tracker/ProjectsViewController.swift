@@ -73,8 +73,8 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
         // TODO: Get project name using userData's memberOf field and indexPath.row.
         // The userData may not have loaded yet. Regardless, you always have your own project.
         let projectName = "TODO"
-        cell.textLabel?.text = projectName
-
+        cell.textLabel?.text = projectName 
+        
         return cell
     }
 

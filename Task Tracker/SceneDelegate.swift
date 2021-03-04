@@ -10,7 +10,6 @@ import UIKit
 import RealmSwift
 
 // TODO: initialize the app with your Realm app ID
-let app = App(id: "<your-realm-app-ID-here>")
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

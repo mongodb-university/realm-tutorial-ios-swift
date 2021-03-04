@@ -17,7 +17,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var notificationToken: NotificationToken?
     // TODO: Use Realm Results collection for `tasks`
     let tasks: [Task] = []
-
+    
     required init(realm: Realm, title: String) {
 
         // Ensure the realm was opened with sync.
@@ -120,10 +120,10 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         // Create the AlertController and add its actions.
         let actionSheet: UIAlertController = UIAlertController(title: task.name, message: "Select an action", preferredStyle: .actionSheet)
-
+ 
         // TODO: Populate the action sheet with task status update functions
         // for every state the task is not currently in.
-
+        
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
                 actionSheet.dismiss(animated: true)
             })
@@ -131,20 +131,20 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Show the actions list.
         self.present(actionSheet, animated: true, completion: nil)
     }
-
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
 
         // User can swipe to delete items.
         let task = tasks[indexPath.row]
-
+        
         // TODO: delete the task from the realm in a write block.
     }
 
     @objc func manageTeamButtonDidClick() {
         present(UINavigationController(rootViewController: ManageTeamViewController()), animated: true)
     }
-
+    
     // Returns true if these are the user's own tasks.
     func isOwnTasks() -> Bool {
         // TODO: Check if the partition value matches the user's project's partition value,

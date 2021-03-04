@@ -116,6 +116,6 @@ class WelcomeViewController: UIViewController {
         // then navigate to the ProjectsViewController.
         // The user realm contains the synced custom user data object, which
         // contains the list of projects the user is a member of.
-        // The user realm partition value is "user=\(user.id!)".
+        // The user realm partition value is "user=\(user.id!)". 
     }
 }

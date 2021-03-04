@@ -18,15 +18,15 @@ class Project: EmbeddedObject {
 }
 
 enum TaskStatus: String {
-    case Open
-    case InProgress
-    case Complete
+  case Open
+  case InProgress
+  case Complete
 }
 
 // TODO: Realm-ify Task model
 class Task {
-    var name: String = ""
-    var statusEnum: TaskStatus = .Open
+   var name: String = ""
+   var statusEnum: TaskStatus = .Open
 }
 
 struct Member {
