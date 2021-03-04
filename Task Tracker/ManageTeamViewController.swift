@@ -80,7 +80,7 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         let user = app.currentUser!
         
         user.functions.getMyTeamMembers([]) { [weak self](result, error) in
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 guard self != nil else {
                     // This can happen if the view is dismissed 
                     // before the operation completes
@@ -123,7 +123,7 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     private func onTeamMemberOperationComplete(result: AnyBSON?, realmError: Error?) {
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async { [self] in
             // Always be sure to stop the activity indicator
             activityIndicator.stopAnimating()
 
