@@ -23,7 +23,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
         // There should only be one user in my realm - that is myself
         let usersInRealm = userRealm.objects(User.self)
 
-        notificationToken = usersInRealm.observe { [weak self, usersInRealm] (changes) in
+        notificationToken = usersInRealm.observe { [weak self, usersInRealm] (_) in
             self?.userData = usersInRealm.first
             guard let tableView = self?.tableView else { return }
             tableView.reloadData()
@@ -54,13 +54,13 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     @objc func logOutButtonDidClick() {
-        let alertController = UIAlertController(title: "Log Out", message: "", preferredStyle: .alert);
+        let alertController = UIAlertController(title: "Log Out", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Yes, Log Out", style: .destructive, handler: {
-            alert -> Void in
-            print("Logging out...");
-            app.currentUser?.logOut() { (error) in
+            _ -> Void in
+            print("Logging out...")
+            app.currentUser?.logOut { (_) in
                 DispatchQueue.main.async {
-                    print("Logged out!");
+                    print("Logged out!")
                     self.navigationController?.popViewController(animated: true)
                 }
             }
@@ -81,7 +81,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
         // User data may not have loaded yet. You always have your own project.
         let projectName = userData?.memberOf[indexPath.row].name ?? "My Project"
         cell.textLabel?.text = projectName
-        
+
         return cell
     }
 
@@ -97,7 +97,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
                 self?.navigationController?.pushViewController(
                     TasksViewController(realm: realm, title: "\(project.name!)'s Tasks"),
                     animated: true
-                );
+                )
             }
         }
     }

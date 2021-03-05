@@ -16,12 +16,12 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     let realm: Realm
     var notificationToken: NotificationToken?
     let tasks: Results<Task>
-    
+
     required init(realm: Realm, title: String) {
 
         // Ensure the realm was opened with sync.
         guard let syncConfiguration = realm.configuration.syncConfiguration else {
-            fatalError("Sync configuration not found! Realm not opened with sync?");
+            fatalError("Sync configuration not found! Realm not opened with sync?")
         }
 
         self.realm = realm
@@ -83,7 +83,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonDidClick))
 
-        if (isOwnTasks()) {
+        if isOwnTasks() {
             // Only set up the manage team button if these are tasks the user owns.
             toolbarItems = [
                 UIBarButtonItem(title: "Manage Team", style: .plain, target: self, action: #selector(manageTeamButtonDidClick))
@@ -103,7 +103,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
         cell.selectionStyle = .none
         cell.textLabel?.text = task.name
-        switch (task.statusEnum) {
+        switch task.statusEnum {
         case .Open:
             cell.accessoryView = nil
             cell.accessoryType = UITableViewCell.AccessoryType.none
@@ -123,7 +123,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         // When the user clicks the add button, present them with a dialog to enter the task name.
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: {
-            alert -> Void in
+            _ -> Void in
             let textField = alertController.textFields![0] as UITextField
 
             // Create a new Task with the text that the user entered.
@@ -151,10 +151,10 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         // Create the AlertController and add its actions.
         let actionSheet: UIAlertController = UIAlertController(title: task.name, message: "Select an action", preferredStyle: .actionSheet)
- 
+
         // If the task is not in the Open state, we can set it to open. Otherwise, that action will not be available.
         // We do this for the other two states -- InProgress and Complete.
-        if (task.statusEnum != .Open) {
+        if task.statusEnum != .Open {
             actionSheet.addAction(UIAlertAction(title: "Open", style: .default) { _ in
                     // Any modifications to managed objects must occur in a write block.
                     // When we modify the Task's state, that change is automatically reflected in the realm.
@@ -164,7 +164,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 })
         }
 
-        if (task.statusEnum != .InProgress) {
+        if task.statusEnum != .InProgress {
             actionSheet.addAction(UIAlertAction(title: "Start Progress", style: .default) { _ in
                     try! self.realm.write {
                         task.statusEnum = .InProgress
@@ -172,14 +172,14 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 })
         }
 
-        if (task.statusEnum != .Complete) {
+        if task.statusEnum != .Complete {
             actionSheet.addAction(UIAlertAction(title: "Complete", style: .default) { _ in
                     try! self.realm.write {
                         task.statusEnum = .Complete
                     }
                 })
         }
-        
+
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
                 actionSheet.dismiss(animated: true)
             })
@@ -187,13 +187,13 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Show the actions list.
         self.present(actionSheet, animated: true, completion: nil)
     }
-    
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
 
         // User can swipe to delete items.
         let task = tasks[indexPath.row]
-        
+
         // All modifications to a realm must happen in a write block.
         try! realm.write {
             // Delete the Task.
@@ -204,7 +204,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func manageTeamButtonDidClick() {
         present(UINavigationController(rootViewController: ManageTeamViewController()), animated: true)
     }
-    
+
     // Returns true if these are the user's own tasks.
     func isOwnTasks() -> Bool {
         return partitionValue == "project=\(app.currentUser!.id)"
