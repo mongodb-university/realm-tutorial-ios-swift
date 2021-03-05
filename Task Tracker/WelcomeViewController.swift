@@ -31,15 +31,15 @@ class WelcomeViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad();
+        super.viewDidLoad()
         view.backgroundColor = .white
 
         // Create a view that will automatically lay out the other controls.
-        let container = UIStackView();
+        let container = UIStackView()
         container.translatesAutoresizingMaskIntoConstraints = false
         container.axis = .vertical
         container.alignment = .fill
-        container.spacing = 16.0;
+        container.spacing = 16.0
         view.addSubview(container)
 
         // Configure the activity indicator.
@@ -56,7 +56,7 @@ class WelcomeViewController: UIViewController {
             container.topAnchor.constraint(equalTo: guide.topAnchor, constant: 16),
             // The activity indicator is centered over the rest of the view.
             activityIndicator.centerYAnchor.constraint(equalTo: guide.centerYAnchor),
-            activityIndicator.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: guide.centerXAnchor)
             ])
 
         // Add some text at the top of the view to explain what to do.
@@ -78,11 +78,11 @@ class WelcomeViewController: UIViewController {
         container.addArrangedSubview(passwordField)
 
         // Configure the sign in and sign up buttons.
-        signInButton.setTitle("Sign In", for: .normal);
+        signInButton.setTitle("Sign In", for: .normal)
         signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         container.addArrangedSubview(signInButton)
 
-        signUpButton.setTitle("Sign Up", for: .normal);
+        signUpButton.setTitle("Sign Up", for: .normal)
         signUpButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
         container.addArrangedSubview(signUpButton)
 
@@ -95,10 +95,10 @@ class WelcomeViewController: UIViewController {
     // Turn on or off the activity indicator.
     func setLoading(_ loading: Bool) {
         if loading {
-            activityIndicator.startAnimating();
-            errorLabel.text = "";
+            activityIndicator.startAnimating()
+            errorLabel.text = ""
         } else {
-            activityIndicator.stopAnimating();
+            activityIndicator.stopAnimating()
         }
         emailField.isEnabled = !loading
         passwordField.isEnabled = !loading

@@ -37,4 +37,3 @@ struct Member {
         self.name = document["name"]!!.stringValue!
     }
 }
-

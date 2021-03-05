@@ -46,10 +46,10 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     @objc func logOutButtonDidClick() {
-        let alertController = UIAlertController(title: "Log Out", message: "", preferredStyle: .alert);
+        let alertController = UIAlertController(title: "Log Out", message: "", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Yes, Log Out", style: .destructive, handler: {
-            alert -> Void in
-            print("Logging out...");
+            _ -> Void in
+            print("Logging out...")
             // TODO: log out the app's currentUser, then, on the main thread, pop this
             // view controller from the navigation controller to navigate back to
             // the WelcomeViewController.
@@ -74,7 +74,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
         // The userData may not have loaded yet. Regardless, you always have your own project.
         let projectName = "TODO"
         cell.textLabel?.text = projectName 
-        
+
         return cell
     }
 
