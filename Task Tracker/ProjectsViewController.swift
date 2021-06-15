@@ -19,6 +19,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
         self.userRealm = userRealm
         super.init(nibName: nil, bundle: nil)
 
+        // TODO: fetch user data object
     }
     
 
@@ -26,6 +27,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
         fatalError("init(coder:) has not been implemented")
     }
 
+    // TODO: deinit method
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,22 +49,30 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
             _ -> Void in
             print("Logging out...")
             self.navigationController?.popViewController(animated: true)
+            // TODO: log out the current user
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // You always have one project (your own)
+        return 1 // TODO: calculate number of rows based on user data
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
         cell.selectionStyle = .none
 
+        // TODO: load data about projects that the user can access
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: open the realm for the selected project and navigate to the TasksViewController.
+        // The project information is contained in the userData's memberOf field.
+        // The userData may not have loaded yet. Regardless, the current user always has their own project.
+        // A user's realm name is "project=username".
     }
 }
