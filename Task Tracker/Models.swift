@@ -9,13 +9,6 @@
 import Foundation
 import RealmSwift
 
-class User: Object {
-    // TODO: Add User model (see SDKs panel in Realm UI)
-}
-
-class Project: EmbeddedObject {
-    // TODO: Add Project model (see SDKs panel in Realm UI)
-}
 
 enum TaskStatus: String {
   case Open

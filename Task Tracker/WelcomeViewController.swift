@@ -11,24 +11,17 @@ import RealmSwift
 
 // The WelcomeViewController handles login and account creation.
 class WelcomeViewController: UIViewController {
-    let emailField = UITextField()
-    let passwordField = UITextField()
+    let usernameField = UITextField()
     let signInButton = UIButton(type: .roundedRect)
-    let signUpButton = UIButton(type: .roundedRect)
     let errorLabel = UILabel()
     let activityIndicator = UIActivityIndicatorView(style: .medium)
 
-    var email: String? {
+    var username: String? {
         get {
-            return emailField.text
+            return usernameField.text
         }
     }
 
-    var password: String? {
-        get {
-            return passwordField.text
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,30 +55,23 @@ class WelcomeViewController: UIViewController {
         // Add some text at the top of the view to explain what to do.
         let infoLabel = UILabel()
         infoLabel.numberOfLines = 0
-        infoLabel.text = "Please enter a email and password."
+        infoLabel.text = "Please enter a username."
         container.addArrangedSubview(infoLabel)
 
-        // Configure the email and password text input fields.
-        emailField.placeholder = "Username"
-        emailField.borderStyle = .roundedRect
-        emailField.autocapitalizationType = .none
-        emailField.autocorrectionType = .no
-        container.addArrangedSubview(emailField)
+        // Configure the username text input field.
+        usernameField.placeholder = "Username"
+        usernameField.borderStyle = .roundedRect
+        usernameField.autocapitalizationType = .none
+        usernameField.autocorrectionType = .no
+        container.addArrangedSubview(usernameField)
 
-        passwordField.placeholder = "Password"
-        passwordField.isSecureTextEntry = true
-        passwordField.borderStyle = .roundedRect
-        container.addArrangedSubview(passwordField)
-
-        // Configure the sign in and sign up buttons.
+        
+        // Configure the sign in button.
         signInButton.setTitle("Sign In", for: .normal)
         signInButton.addTarget(self, action: #selector(signIn), for: .touchUpInside)
         container.addArrangedSubview(signInButton)
 
-        signUpButton.setTitle("Sign Up", for: .normal)
-        signUpButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
-        container.addArrangedSubview(signUpButton)
-
+        
         // Error messages will be set on the errorLabel.
         errorLabel.numberOfLines = 0
         errorLabel.textColor = .red
@@ -100,22 +86,13 @@ class WelcomeViewController: UIViewController {
         } else {
             activityIndicator.stopAnimating()
         }
-        emailField.isEnabled = !loading
-        passwordField.isEnabled = !loading
+        
+        usernameField.isEnabled = !loading
         signInButton.isEnabled = !loading
-        signUpButton.isEnabled = !loading
     }
 
-    @objc func signUp() {
-        // TODO: Use the app's emailPasswordAuth to registerUser with the email and password.
-        // When registered, call signIn().
-    }
 
     @objc func signIn() {
-        // TODO: Use app.login() to log in. Once logged in, open the user realm,
-        // then navigate to the ProjectsViewController.
-        // The user realm contains the synced custom user data object, which
-        // contains the list of projects the user is a member of.
-        // The user realm partition value is "user=\(user.id!)". 
+        // TODO: Open a project realm and launch the task view.
     }
 }

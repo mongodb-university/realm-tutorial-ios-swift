@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-// TODO: initialize the app with your Realm app ID
+// TODO: Declare a global Realm App instance.
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

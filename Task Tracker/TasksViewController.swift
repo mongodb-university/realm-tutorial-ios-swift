@@ -12,24 +12,14 @@ import RealmSwift
 class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let tableView = UITableView()
-    let partitionValue: String
     let realm: Realm
     var notificationToken: NotificationToken?
     // TODO: Use Realm Results collection for `tasks`
     let tasks: [Task] = []
 
     required init(realm: Realm, title: String) {
-
-        // Ensure the realm was opened with sync.
-        guard let syncConfiguration = realm.configuration.syncConfiguration else {
-            fatalError("Sync configuration not found! Realm not opened with sync?")
-        }
-
         self.realm = realm
-
-        // Partition value must be of string type.
-        partitionValue = syncConfiguration.partitionValue!.stringValue!
-
+        
         // TODO: initialize `tasks` with the collection of Tasks in the realm, sorted by _id.
 
         super.init(nibName: nil, bundle: nil)
@@ -59,13 +49,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonDidClick))
 
-        if isOwnTasks() {
-            // Only set up the manage team button if these are tasks the user owns.
-            toolbarItems = [
-                UIBarButtonItem(title: "Manage Team", style: .plain, target: self, action: #selector(manageTeamButtonDidClick))
-            ]
-            navigationController?.isToolbarHidden = false
-        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,6 +85,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             _ -> Void in
             let textField = alertController.textFields![0] as UITextField
 
+            
             // TODO: Create a Task instance and add it to the realm in a write block.
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -141,14 +125,5 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // TODO: delete the task from the realm in a write block.
     }
 
-    @objc func manageTeamButtonDidClick() {
-        present(UINavigationController(rootViewController: ManageTeamViewController()), animated: true)
-    }
 
-    // Returns true if these are the user's own tasks.
-    func isOwnTasks() -> Bool {
-        // TODO: Check if the partition value matches the user's project's partition value,
-        // which should look like "project=\(app.currentUser()!.id!)"
-        return false
-    }
 }
