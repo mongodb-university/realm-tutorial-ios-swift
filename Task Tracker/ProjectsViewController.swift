@@ -16,7 +16,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
     var notificationToken: NotificationToken?
 
     init(userRealmConfiguration: Realm.Configuration) {
-        // TODO: fetch user data object
+        self.userRealm = try! Realm(configuration: userRealmConfiguration)
         super.init(nibName: nil, bundle: nil)
     }
     
