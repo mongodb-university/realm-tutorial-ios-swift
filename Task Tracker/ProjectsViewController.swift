@@ -17,7 +17,6 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 
     init(userRealmConfiguration: Realm.Configuration) {
         // TODO: fetch user data object
-        super.init(nibName: nil, bundle: nil)
     }
     
 
