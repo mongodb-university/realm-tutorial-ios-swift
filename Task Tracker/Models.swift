@@ -8,11 +8,17 @@
 import Foundation
 import RealmSwift
 
+// :code-block-start: user-model
+// :state-start: sync
 class User: Object {
     @Persisted(primaryKey: true) var _id: String = ""
     @Persisted var name: String = ""
     @Persisted var memberOf: List<Project>
 }
+// :state-end:
+// :code-block-end:
+// :code-block-start: project-model
+// :state-start: sync
 class Project: EmbeddedObject {
     @Persisted var name: String?
     @Persisted var partition: String?
@@ -22,6 +28,8 @@ class Project: EmbeddedObject {
         self.name = name
     }
 }
+// :state-end:
+// :code-block-end:
 
 enum TaskStatus: String {
   case Open
@@ -29,6 +37,8 @@ enum TaskStatus: String {
   case Complete
 }
 
+// :code-block-start: task-model
+// :state-start: local sync
 class Task: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var name: String = ""
@@ -49,6 +59,14 @@ class Task: Object {
         self.name = name
     }
 }
+// :state-end: :state-uncomment-start: start
+// // TODO: Realm-ify Task model
+// class Task {
+//    var name: String = ""
+//    var statusEnum: TaskStatus = .Open
+// }
+// :state-uncomment-end:
+// :code-block-end:
 
 struct Member {
     let id: String
