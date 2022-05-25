@@ -4,8 +4,7 @@
 //
 //  Copyright © 2020-2022 MongoDB, Inc. All rights reserved.
 //
-// :code-block-start: complete
-// :state-start: sync
+
 import UIKit
 import RealmSwift
 
@@ -72,7 +71,6 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         removeTeamMember(email: members[indexPath.row].name)
     }
 
-    // :code-block-start: fetch-team-members
     // Calls a Realm function to fetch the team members and adds them to the list
     func fetchTeamMembers() {
         // Start loading indicator
@@ -105,9 +103,7 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
-    // :code-block-end:
 
-    // :code-block-start: add-team-member
     func addTeamMember(email: String) {
         print("Adding member: \(email)")
         activityIndicator.startAnimating()
@@ -115,9 +111,7 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
 
         user.functions.addTeamMember([AnyBSON(email)], self.onTeamMemberOperationComplete)
     }
-    // :code-block-end:
 
-    // :code-block-start: remove-team-member
     func removeTeamMember(email: String) {
         print("Removing member: \(email)")
         activityIndicator.startAnimating()
@@ -125,7 +119,6 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
 
         user.functions.removeTeamMember([AnyBSON(email)], self.onTeamMemberOperationComplete)
     }
-    // :code-block-end:
 
     private func onTeamMemberOperationComplete(result: AnyBSON?, realmError: Error?) {
         DispatchQueue.main.async { [self] in
@@ -171,5 +164,3 @@ class ManageTeamViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 }
-// :state-end: sync
-// :code-block-end:
