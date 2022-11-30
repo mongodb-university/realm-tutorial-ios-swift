@@ -1,6 +1,8 @@
-# Realm iOS Swift Tutorial
+# ⚠️ Archived
 
-Follow along at https://www.mongodb.com/docs/realm/tutorial/ios-swift/
+**Please see https://www.mongodb.com/docs/atlas/app-services/tutorial/swiftui/ for the new tutorial!**
+
+Original README follows:
 
 ## Troubleshooting
 
